@@ -1,0 +1,109 @@
+" set encoding=utf-8
+
+"  Searching
+set nohlsearch	" do not highlight search patterns
+set incsearch	" incremental search (search while pattern is typed)
+set smartcase	" case-insensitive searching until pattern is in lower case
+
+" Misc
+set laststatus=2	" always display the status line
+set title titlestring=vim\ -\ %F\ %h " format of the window title
+set foldenable			" use folding
+set foldmethod=syntax	" use language syntax for folding
+set visualbell		" Don't beep me, you beep!
+
+" Coloring
+syntax on		" switch on syntax highlighting
+set bg=			" use colors for the dark background
+"olorsheme darkblue
+
+
+" Options
+
+set shiftwidth=4 " Width of shift when we use > or <
+
+set nu!			" Show number of row
+set nowrap	
+set autoindent	" automatic indenting of new lines
+set autowrite	" saves unwritten buffers
+set nobackup	" do not create backup files
+set bs=2		" backspace over everything in insert mode
+set ruler		" show cursor position in the file
+set history=50	" keep last 50 commands
+" set showcmd=1	" show command autocompletion
+" set wildmenu=1	" show autocompetion in status menu
+set tabstop=4	" tabs are 4 characters long
+set wrapmargin=1	" margin from the right to show wrapping
+"set formatoptions=tcrqn
+
+" Settings for coloured GUI mode
+if has("gui_running")
+	syntax on
+	set bg=light
+	colorscheme default	" use different colorscheme
+	  
+endif
+
+" Comments highlight
+highlight Comment ctermfg=green
+
+augroup filetypedetect
+autocmd! BufNewFile,BufRead *.epl,*.phtml setf embperl
+augroup END
+
+autocmd BufNewFile,BufRead *.epl,*.phtml colorscheme embperl_yellow
+
+" Functions
+":function BOFHSignature ()		" Put short fortune from bofh-excuses into mail
+":$
+":read !/bin/echo
+":read !/bin/echo BOFH: 
+":read !/usr/games/fortune -s -n 72 bofh-excuses
+":map <F9> u:call BOFHSignature()<CR>kJ
+":endfunction
+
+":function SetOptionsProgram ()	" Set options for scripts and programs
+":set number						" Line numbers
+":set nowrap						" No line wrapping
+":set showmatch					" Show matching opening bracket
+":set matchtime=5				" Show match for half a second
+":set ts=8						" Tab stops should be 8 chars long
+":endfunction
+
+":function SetOptionsMail ()		" Set options for email messages and news
+":set tw=72						" Text width 72 columns
+":set wrap						" Line wrapping on
+":set joinspaces					" Use two spaces after joins
+":endfunction
+
+":function SetOptionsText ()		" Set options for text files
+":set tw=78						" Text width 78 columns
+":set wrap						" Line wrapping on
+":set joinspaces					" Use two spaces after joins
+":endfunction
+
+" Autocommands
+" mail files can be appended with short BOFH signature with F9.
+"autocmd BufRead snd.\d\+,.letter,.letter.\d\+,.followup,.article,.article.\d\+,pico.\d\+,mutt-*-\d\+,mutt\w\{6\},ae\d\+.txt map <F9> :call BOFHSignature()<ENTER>kJ
+" set options for different types of files
+"autocmd BufRead snd.\d\+,.letter,.letter.\d\+,.followup,.article,.article.\d\+,pico.\d\+,mutt-*-\d\+,mutt\w\{6\},ae\d\+.txt call SetOptionsMail()
+"autocmd BufRead *.txt,*.tex call SetOptionsText()
+"autocmd BufRead *.pl,*.py,*.sh,*.sql,*.php*,*.epl,*.c,*.h call SetOptionsProgram()
+
+"au! CursorHold * let @/ = '\%' . line('.') . 'l.*'
+
+"" If no files specified, start with explorer
+"if argc() == 0
+"	silent exe 'e .'
+"endif
+
+" Start in insert mode and
+" set escape to switch to
+" command mode or back to
+" insert.
+" set im!
+" map <esc> :set im!<cr>
+" map i :set im!<cr>
+" map! <esc> <c-o>:set im!<cr>
+" 
+
