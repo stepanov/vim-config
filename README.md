@@ -1,0 +1,4 @@
+vim-config
+==========
+
+VIM configuration
